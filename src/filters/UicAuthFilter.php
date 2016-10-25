@@ -24,6 +24,11 @@ class UicAuthFilter extends ActionFilter
     private $noLoginCode = 401;
 
     /**
+     * @var string 用户中心真正登录地址
+     */
+    protected $homeLogin;
+
+    /**
      * @var string 用户中心验证 ticket 地址
      */
     private $decodeTicket;

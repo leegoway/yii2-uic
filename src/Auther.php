@@ -3,13 +3,14 @@
 namespace leegoway\uic;
 
 use Yii;
-use yii\helpers\Component;
+use yii\base\Component;
+use yii\web\Cookie;
 
 class Auther extends Component 
 {
-	protected $domain = 'autops.corp.elong.com';
-	protected $path = '/';
-	protected $expire = 3600;
+	public $domain = 'autops.corp.elong.com';
+	public $path = '/';
+	public $expire = 3600;
 
 	/** 
 	 * 登录，注册cookie
@@ -17,13 +18,14 @@ class Auther extends Component
 	public function login($username) {
 		$value = PassCookie::passC($username);
 		$cookies = Yii::$app->response->cookies;
-		$cookies->add(new yii\web\Cookie([
+		$cookies->add(new Cookie([
 			'name' => Yii::$app->name,
 			'value' => $value,
 			'domain' => $this->domain,
 			'path' => $this->path,
 			'expire' => $this->expire
 			]));
+		return true;
 	}
 
 	/** 
@@ -32,6 +34,7 @@ class Auther extends Component
 	public function logout() {
 		$cookies = Yii::$app->response->cookies;
 		$cookies->remove(Yii::$app->name);
+		return true;
 	}
 
 	/** 

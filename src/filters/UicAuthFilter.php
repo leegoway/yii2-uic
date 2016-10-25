@@ -4,6 +4,7 @@ namespace leegoway\uic\filters;
 
 use Yii;
 use yii\base\ActionFilter;
+use GuzzleHttp\Client;
 
 class UicAuthFilter extends ActionFilter
 {

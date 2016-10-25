@@ -2,6 +2,7 @@
     "name": "leegoway/yii2-uic",
     "description": "The uic extension for Yii2 framework",
     "type": "yii2-extension",
+    "keywords": ["yii2", "extension", "uic", "auth"],
     "license": "BSD 3-Clause",
     "authors": [
         {

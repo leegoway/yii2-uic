@@ -12,10 +12,11 @@ trait UicAuthFacade
     
     public function behaviors() {
         $behaviors = parent::behaviors();
-        $behaviors['uicAuth'] => [
+        $behaviors['uicAuth'] = [
             'class'  => UicAuthFilter::className(),
             'except' => $this->exceptAuth,
             'only'   => $this->onlyAuth
         ];
+        return $behaviors;
     }
 }

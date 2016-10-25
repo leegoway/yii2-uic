@@ -1,6 +1,6 @@
 <?php
 
-namespace leegoway\uic;
+namespace leegoway\uic\filters;
 
 use Yii;
 use yii\base\ActionFilter;

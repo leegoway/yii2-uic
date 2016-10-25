@@ -1,0 +1,22 @@
+{
+    "name": "leegoway/yii2-uic",
+    "description": "The uic extension for Yii2 framework",
+    "type": "yii2-extension",
+    "license": "BSD 3-Clause",
+    "authors": [
+        {
+            "name": "leegoway",
+            "email": "leego.sir@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "yiisoft/yii2": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "leegoway\\uic\\": "src/"
+        }
+    }
+
+}

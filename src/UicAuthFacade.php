@@ -3,7 +3,6 @@
 namespace leegoway\uic;
 
 use yii;
-use yii\rest\Controller;
 use leegoway\uic\filters\UicAuthFilter;
 
 trait UicAuthFacade

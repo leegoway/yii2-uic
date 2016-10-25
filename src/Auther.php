@@ -23,7 +23,7 @@ class Auther extends Component
 			'value' => $value,
 			'domain' => $this->domain,
 			'path' => $this->path,
-			'expire' => $this->expire
+			'expire' => time() + $this->expire
 			]));
 		return true;
 	}

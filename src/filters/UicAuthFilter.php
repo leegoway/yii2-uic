@@ -5,6 +5,7 @@ namespace leegoway\uic\filters;
 use Yii;
 use yii\base\ActionFilter;
 use GuzzleHttp\Client;
+use leegoway\rest\Formatter;
 
 class UicAuthFilter extends ActionFilter
 {
@@ -67,7 +68,7 @@ class UicAuthFilter extends ActionFilter
             if (!$this->loginViaUic()) {
                 Yii::info('Login Via Uic Failed', 'AUTH');
                 if (Yii::$app->request->isAjax) {
-                    echo json_encode(AjaxHelper::ajaxErrorJSON($this->noLoginCode));
+                    echo Formatter::fail('没有登录', 401);
                     return false;
                 }
                 Yii::$app->response->redirect($this->homeLogin)->send();

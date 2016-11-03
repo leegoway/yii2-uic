@@ -18,12 +18,13 @@ class Auther extends Component
 	public function login($username) {
 		$value = PassCookie::passC($username);
 		$cookies = Yii::$app->response->cookies;
-		$cookies->add(new Cookie([
+		$res = $cookies->add(new Cookie([
 			'name' => Yii::$app->name,
 			'value' => $value,
 			'domain' => $this->domain,
 			'path' => $this->path,
-			'expire' => time() + $this->expire
+			'expire' => time() + $this->expire,
+			'httpOnly' => false
 			]));
 		return true;
 	}
@@ -32,7 +33,7 @@ class Auther extends Component
 	 * 退出登录，注销cookie
 	 */
 	public function logout() {
-		$cookies = Yii::$app->response->cookies;
+		$cookies = Yii::$app->request->cookies;
 		$cookies->remove(Yii::$app->name);
 		return true;
 	}
@@ -42,7 +43,7 @@ class Auther extends Component
 	 */
 	public function user() {
 		$username = null;
-		$cookies = Yii::$app->response->cookies;
+		$cookies = Yii::$app->request->cookies;
 		if($cookies->has(Yii::$app->name)) {
 			$value = $cookies[Yii::$app->name]->value;
 			$username = PassCookie::passC($value, 'DECODE');

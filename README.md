@@ -29,7 +29,6 @@ to the ```require``` section of your `composer.json` file.
 return [
     'components' => [
         'uicAuther' => [
-            // 中国云信
             'class' => 'leegoway\uic\Auther',
             'domain' => 'autops.corp.elong.com',//cookie的domain属性
             'path' => '/',//cookie的路径
@@ -47,5 +46,11 @@ use leegoway\uic\UicAuthFacade;
 ...
 trait UicAuthFacade;
 
+```
+
+Secondly, you can check permission like the following code:
+
+```php
+Yii::$app->uicAuther->checkPermission($permissionId, $organizationId, [$username]); //$username default current login username
 ```
 

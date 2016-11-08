@@ -82,7 +82,6 @@ class Auther extends Component
             Yii::info('GET UIC_CheckPerm Error: httpCode=' . $response->getStatusCode(), 'UIC');
         }
         return $result;	
-
 	}
 
 

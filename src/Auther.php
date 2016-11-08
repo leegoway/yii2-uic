@@ -6,6 +6,7 @@ use Yii;
 use yii\base\Component;
 use yii\web\Cookie;
 use leegoway\rest\RestException;
+use GuzzleHttp\Client;
 
 class Auther extends Component 
 {

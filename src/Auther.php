@@ -5,6 +5,7 @@ namespace leegoway\uic;
 use Yii;
 use yii\base\Component;
 use yii\web\Cookie;
+use leegoway\rest\RestException;
 
 class Auther extends Component 
 {
@@ -50,5 +51,39 @@ class Auther extends Component
 		}
 		return $username;
 	}
+
+	/**
+	 * 校验权限
+	 */
+	public function checkPermission($permissionId, $organizationId, $username = null) {
+		$result = false;
+		if(empty($username)){
+			$username = $this->user();
+		}
+		if(empty($username)){
+			throw new RestException('获取用户信息失败，请先登录', 401);
+		}
+
+		$uicUrl = 'http://uic.corp.elong.com';
+		if (isset(Yii::$app->params['uicUrl'])) {
+            $uicUrl = Yii::$app->params['uicUrl'];
+        }
+        $url = $uicUrl . '/ucenter/api/auth?organizationId=' . $organizationId . '&permissionId=' . $permissionId . '&username=' . $username;
+        $httpClient = new Client();
+        $response = $httpClient->request('GET', $url);
+        if ($response->getStatusCode() == 200) {
+            if (($res = json_decode($response->getBody())) && $res->code == 200) {
+                Yii::info('GET UIC_CheckPerm  OK: time=' . date('Y-m-d H:i:s') , "UIC");
+                $result = $res->data;
+            } else {
+                Yii::info('GET UIC_CheckPerm Error: time=' . date('Y-m-d H:i:s') . ',msg='. $response->getBody(), "UIC");
+            }
+        }else{
+            Yii::info('GET UIC_CheckPerm Error: httpCode=' . $response->getStatusCode(), 'UIC');
+        }
+        return $result;	
+
+	}
+
 
 }

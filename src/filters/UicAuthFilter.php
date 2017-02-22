@@ -142,7 +142,7 @@ class UicAuthFilter extends ActionFilter
 
     public function login($userData){
         $loginDuration = isset(Yii::$app->params['loginDuration']) ? Yii::$app->params['loginDuration'] : 7 * 24 * 60 * 60;
-        return Yii::$app->uicAuther->login($userData->username);
+        return Yii::$app->uicAuther->login($userData);
     }
 
     //todo 调用uic退出

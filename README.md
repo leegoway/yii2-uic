@@ -44,7 +44,7 @@ then in your controller which need auth, then add the following code:
 use leegoway\uic\UicAuthFacade;
 
 ...
-trait UicAuthFacade;
+use UicAuthFacade;
 
 ```
 

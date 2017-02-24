@@ -14,10 +14,13 @@ class Auther extends Component
 	public $path = '/';
 	public $expire = 3600;
 
+	private $loginUser = null;
+
 	/** 
 	 * 登录，注册cookie
 	 */
 	public function login($user) {
+		$this->loginUser = $user;
 		$username = PassCookie::passC($user->username);
 		$cookies = Yii::$app->response->cookies;
 		$res = $cookies->add(new Cookie([
@@ -47,6 +50,7 @@ class Auther extends Component
 		$cookies = Yii::$app->request->cookies;
 		$cookies->remove(Yii::$app->name);
 		$cookies->remove(Yii::$app->name . '_i');
+		$this->loginUser = null;
 		return true;
 	}
 
@@ -56,7 +60,9 @@ class Auther extends Component
 	public function user() {
 		$username = null;
 		$cookies = Yii::$app->request->cookies;
-		if($cookies->has(Yii::$app->name)) {
+		if ($this->loginUser) {
+			$username = $this->loginUser->username;
+		}elseif ($cookies->has(Yii::$app->name)) {
 			$value = $cookies[Yii::$app->name]->value;
 			$username = PassCookie::passC($value, 'DECODE');
 		}
@@ -69,7 +75,9 @@ class Auther extends Component
 	public function userId() {
 		$userid = null;
 		$cookies = Yii::$app->request->cookies;
-		if($cookies->has(Yii::$app->name . '_i')) {
+		if ($this->loginUser) {
+			$userid = $this->loginUser->id;
+		}elseif($cookies->has(Yii::$app->name . '_i')) {
 			$value = $cookies[Yii::$app->name . '_i']->value;
 			$userid = PassCookie::passC($value, 'DECODE');
 		}

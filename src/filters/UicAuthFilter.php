@@ -68,7 +68,7 @@ class UicAuthFilter extends ActionFilter
             if (!$this->loginViaUic()) {
                 Yii::info('Login Via Uic Failed', 'AUTH');
                 if (Yii::$app->request->isAjax) {
-                    echo Formatter::fail('没有登录', 401);
+                    echo json_encode(Formatter::fail('没有登录', 401));
                     return false;
                 }
                 Yii::$app->response->redirect($this->homeLogin)->send();
